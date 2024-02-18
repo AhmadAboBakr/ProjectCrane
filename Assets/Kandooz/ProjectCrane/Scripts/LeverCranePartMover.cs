@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Kandooz.ProjectCrane
 {
     [RequireComponent(typeof(ICranePart))]
+    [RequireComponent(typeof(MovementAudioFeedback))]
     public class LeverCranePartMover : MonoBehaviour
     {
         [SerializeField] private LeverInteractable lever;

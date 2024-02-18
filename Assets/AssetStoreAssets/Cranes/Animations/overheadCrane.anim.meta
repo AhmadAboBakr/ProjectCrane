@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 66ac9c9152946d1438289ff9df5445f8
+timeCreated: 1497207918
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Animations/overheadCrane.anim
+  uploadId: 527737

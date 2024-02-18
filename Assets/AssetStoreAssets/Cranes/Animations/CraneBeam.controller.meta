@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a4db8d05e1aed37498d65f632b5b6f2c
+timeCreated: 1490480363
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Animations/CraneBeam.controller
+  uploadId: 527737

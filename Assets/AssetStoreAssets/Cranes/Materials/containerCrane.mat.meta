@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 20ec1a55d96d4d347a1ddef19f24f1cb
+timeCreated: 1497074443
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Materials/containerCrane.mat
+  uploadId: 527737

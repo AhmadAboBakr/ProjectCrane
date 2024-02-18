@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8de984358718c6e46bf291419f3166b6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Prefabs/overheadCrane.prefab
+  uploadId: 527737

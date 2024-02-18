@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a5e2960c21be3cb42b959631762d681c
+timeCreated: 1497207918
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Animations/gantryCrane2.anim
+  uploadId: 527737

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 550eff8a13a5c8e47b621dac742cb88b
+timeCreated: 1495374060
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Materials/gantryCrane2.mat
+  uploadId: 527737

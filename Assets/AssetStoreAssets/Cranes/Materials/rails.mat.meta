@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2f5d55f6ff3a765459fc3daa848be595
+timeCreated: 1495332736
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Materials/rails.mat
+  uploadId: 527737

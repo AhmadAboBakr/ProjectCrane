@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 62c7ac29aa5bce84696145156e5d7296
+timeCreated: 1497208063
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Animations/craneBeamOverhead_hook.anim
+  uploadId: 527737

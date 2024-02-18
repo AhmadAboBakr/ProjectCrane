@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d2b664045d926fd4881f041da333727f
+timeCreated: 1497074453
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Materials/glass.mat
+  uploadId: 527737

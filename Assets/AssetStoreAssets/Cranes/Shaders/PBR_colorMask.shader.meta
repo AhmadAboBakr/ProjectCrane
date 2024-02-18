@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6e3456eda9489fd4da825ca59aac10e1
+timeCreated: 1497287425
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Shaders/PBR_colorMask.shader
+  uploadId: 527737

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: afb46ef90c39f2a49ab876053a3eff9f
+timeCreated: 1497189193
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Prefabs/truss.prefab
+  uploadId: 527737

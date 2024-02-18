@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1a91591b070ed3e40b49b699f3a85df1
+timeCreated: 1497034909
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Materials/concrete.mat
+  uploadId: 527737

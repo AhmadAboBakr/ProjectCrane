@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 714ca94551ab5064592834e56a9e3dc4
+timeCreated: 1497208063
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: "Assets/Cranes/Animations/\u0441raneBeam_telpher.anim"
+  uploadId: 527737

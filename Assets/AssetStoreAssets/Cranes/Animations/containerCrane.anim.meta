@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ed3ef2c65b3c696439412dc5c5bcb90c
+timeCreated: 1497077396
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Animations/containerCrane.anim
+  uploadId: 527737

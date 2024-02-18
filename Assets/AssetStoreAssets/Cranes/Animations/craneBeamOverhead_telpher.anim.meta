@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2d30a8cbb0b815b4f9f9f26074325a7f
+timeCreated: 1497208063
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Animations/craneBeamOverhead_telpher.anim
+  uploadId: 527737

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 30dba1eeaea7bf04c9b524004399945a
+timeCreated: 1497208063
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Animations/gantryCrane2_hook.anim
+  uploadId: 527737

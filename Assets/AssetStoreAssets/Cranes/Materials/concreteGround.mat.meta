@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e2accbac6849b324283bea0873f5f616
+timeCreated: 1497194272
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Materials/concreteGround.mat
+  uploadId: 527737

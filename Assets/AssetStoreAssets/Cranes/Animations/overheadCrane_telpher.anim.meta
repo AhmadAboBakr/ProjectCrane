@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 124760468b0a02649928cf5bf66a4bef
+timeCreated: 1497208063
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Animations/overheadCrane_telpher.anim
+  uploadId: 527737

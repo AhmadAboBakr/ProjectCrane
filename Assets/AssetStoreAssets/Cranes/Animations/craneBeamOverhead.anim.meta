@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 158eac39dc5b02445b12c45e17698fed
+timeCreated: 1497207918
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Animations/craneBeamOverhead.anim
+  uploadId: 527737

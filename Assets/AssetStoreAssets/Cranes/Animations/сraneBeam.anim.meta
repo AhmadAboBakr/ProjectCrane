@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7011f99bb93dc7b419187c163d74c2aa
+timeCreated: 1497207918
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: "Assets/Cranes/Animations/\u0441raneBeam.anim"
+  uploadId: 527737

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b9cebb552fc8f4248a72c4c011b50c0a
+timeCreated: 1497042581
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Prefabs/telpher2.prefab
+  uploadId: 527737

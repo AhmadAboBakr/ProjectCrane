@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e4982ada485d0be4995475e71b10c515
+timeCreated: 1495375392
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Materials/overheadCraneDetals.mat
+  uploadId: 527737

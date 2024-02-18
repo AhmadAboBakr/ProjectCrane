@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 20b7a28edd2646c4b8cdb8acbdcca6bd
+timeCreated: 1497208342
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: "Assets/Cranes/Animations/\u0441raneBeam_hook.anim"
+  uploadId: 527737

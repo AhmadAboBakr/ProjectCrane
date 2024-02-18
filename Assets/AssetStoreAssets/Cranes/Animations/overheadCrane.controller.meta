@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0fb78a3c8225c6f4c904beb45483fbb7
+timeCreated: 1490480363
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Animations/overheadCrane.controller
+  uploadId: 527737

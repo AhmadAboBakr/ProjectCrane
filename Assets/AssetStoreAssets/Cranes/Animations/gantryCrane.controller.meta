@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2c6b9aa84c2900d40ac0a91029e62a8f
+timeCreated: 1490480363
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Animations/gantryCrane.controller
+  uploadId: 527737

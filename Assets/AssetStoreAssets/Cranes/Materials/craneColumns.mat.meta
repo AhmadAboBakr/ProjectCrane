@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1b5977f05b5d821479ce2d05656a1abf
+timeCreated: 1495365535
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Materials/craneColumns.mat
+  uploadId: 527737

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 61e0c6a52b223064abfe85aab8bec53f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Prefabs/craneBeam.prefab
+  uploadId: 527737

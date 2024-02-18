@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0aca9c13af4fbe74f88e6d83a90665be
+timeCreated: 1497080170
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Animations/containerCrane_truck.anim
+  uploadId: 527737

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6803edb4dd5e91f45a912e92fc397486
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Prefabs/craneBeamOverhead.prefab
+  uploadId: 527737

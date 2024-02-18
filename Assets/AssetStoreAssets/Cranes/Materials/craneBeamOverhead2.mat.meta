@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c022f3ea0cc17fa4597232fdaaabee34
+timeCreated: 1495328835
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26465
+  packageName: Cranes
+  packageVersion: 2.1
+  assetPath: Assets/Cranes/Materials/craneBeamOverhead2.mat
+  uploadId: 527737

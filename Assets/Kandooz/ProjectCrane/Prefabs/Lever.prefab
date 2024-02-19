@@ -315,6 +315,7 @@ MonoBehaviour:
   hand: 2
   config: {fileID: 11400000, guid: a98f0f16ca30a4ce2a4102435d346e0c, type: 2}
   handModel: {fileID: 2959896202573412860}
+  debug: 0
 --- !u!1 &231785376773276917
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,8 +882,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2546553922164532198}
   - component: {fileID: 7286934106106506884}
+  - component: {fileID: 1943264246196357284}
   m_Layer: 0
-  m_Name: leftLever
+  m_Name: Lever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -926,10 +928,34 @@ MonoBehaviour:
       m_Calls: []
   onHoverStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1943264246196357284}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Highlight
+          m_BoolArgument: 0
+        m_CallState: 2
   onHoverEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1943264246196357284}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Normal
+          m_BoolArgument: 0
+        m_CallState: 2
   onActivated:
     m_PersistentCalls:
       m_Calls: []
@@ -986,20 +1012,35 @@ MonoBehaviour:
   constraintsType: 2
   smoothHandTransition: 1
   limited: 0
-  limit: 30
-  center: 0
-  onAngleChanged:
+  snapToCenter: 0
+  limits:
+    x: 0
+    z: 0
+  onLeverChanged:
     m_PersistentCalls:
       m_Calls: []
-  onOpen:
-    m_PersistentCalls:
-      m_Calls: []
-  onClose:
-    m_PersistentCalls:
-      m_Calls: []
-  onMiddle:
-    m_PersistentCalls:
-      m_Calls: []
+--- !u!95 &1943264246196357284
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423927435725052438}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f6263734d04e4919a8d83049159ca75, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1463682548831395125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,6 +1944,7 @@ MonoBehaviour:
   hand: 1
   config: {fileID: 11400000, guid: a98f0f16ca30a4ce2a4102435d346e0c, type: 2}
   handModel: {fileID: 7082898407115756098}
+  debug: 0
 --- !u!1 &2877517430584508799
 GameObject:
   m_ObjectHideFlags: 0

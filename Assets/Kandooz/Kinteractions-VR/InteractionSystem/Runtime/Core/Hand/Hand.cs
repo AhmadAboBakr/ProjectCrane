@@ -1,5 +1,6 @@
 using System;
 using Kandooz.InteractionSystem.Animations.Constraints;
+using UniRx.Triggers;
 using UnityEngine;
 
 namespace Kandooz.InteractionSystem.Core
@@ -9,6 +10,7 @@ namespace Kandooz.InteractionSystem.Core
         [SerializeField] private HandIdentifier hand;
         [SerializeField] private Config config;
         [SerializeField] private Renderer handModel;
+        [SerializeField] private bool debug;
         private IPoseable poseDriver;
         
         public HandIdentifier HandIdentifier
@@ -48,6 +50,15 @@ namespace Kandooz.InteractionSystem.Core
         public void Unconstrain(IPoseConstrainer constrain)
         {
             poseDriver.Constrains= PoseConstrains.Free;
+        }
+
+        private void Update()
+        {
+            if (debug)
+            {
+                this.transform.position += transform.right * Input.GetAxis("Horizontal")*Time.deltaTime/10;
+                this.transform.position += transform.forward * Input.GetAxis("Vertical")*Time.deltaTime/10;
+            }
         }
 
         public static implicit operator HandIdentifier(Hand hand) => hand.HandIdentifier;

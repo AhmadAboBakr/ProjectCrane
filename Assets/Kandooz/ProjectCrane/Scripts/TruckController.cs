@@ -11,6 +11,7 @@ namespace Kandooz
     {
         [SerializeField] private float speed = 1;
         [SerializeField] private float acceleration;
+        [SerializeField] private Vector3 movementDirection;
         private Rigidbody _rigidbody;
         private float _direction = 0;
 
@@ -23,7 +24,7 @@ namespace Kandooz
         private void FixedUpdate()
         {
             var velocity = _rigidbody.velocity;
-            velocity += transform.right * (acceleration * Time.fixedTime * _direction);
+            velocity += movementDirection * (acceleration * Time.fixedTime * _direction);
             velocity = Vector3.ClampMagnitude(velocity, speed);
             _rigidbody.velocity = velocity;
         }

@@ -7,91 +7,104 @@ namespace Kandooz.InteractionSystem.Interactions
 {
     public class LeverInteractable : ConstrainedInteractableBase
     {
-        [SerializeField] private bool limited;
-        [SerializeField] private float limit = 30;
-        [SerializeField] private float center = 0;
-        [SerializeField] private UnityEvent onAngleChanged;
-        [SerializeField] private UnityEvent onOpen;
-        [SerializeField] private UnityEvent onClose;
-        [SerializeField] private UnityEvent onMiddle;
+        public IObservable<XZPair> OnLeverChanged => onLeverChanged.AsObservable();
+        [SerializeField] private bool limited = true;
+        [SerializeField] private bool snapToCenter;
+        [SerializeField] private XZPair limits;
+        [SerializeField] private AngleChangeUnityEvent onLeverChanged;
 
-        private float oldNormalizedAngle;
-        private float currentNormalizedAngle;
-        
-        public IObservable<Unit> OnAngleChanged => onAngleChanged.AsObservable();
-        public IObservable<Unit> OnOpen => onOpen.AsObservable();
-        public IObservable<Unit> OnClose => onClose.AsObservable();
-        
+        private XZPair _currentNormalizedAngle = new(0, 0);
+        private XZPair _oldNormalizedAngle = new(0, 0);
+
 
         private void Start()
         {
-            oldNormalizedAngle = currentNormalizedAngle = 0;
             OnDeselected
-                .Do(_ => RotateLever(0))
+                .Do(_ => Rotate(0,0))
                 .Do(_ => InvokeEvents())
                 .Subscribe().AddTo(this);
         }
 
-        protected override void Activate(){}
-        protected override void StartHover(){}
-        protected override void EndHover(){}
+        protected override void Activate()
+        {
+        }
+
+        protected override void StartHover()
+        {
+        }
+
+        protected override void EndHover()
+        {
+        }
 
         private void Update()
         {
             if (!IsSelected) return;
-            var angle = CalculateAngle();
-            RotateLever(angle);
+            Rotate(CalculateAngle(transform.right), CalculateAngle(transform.forward));
             InvokeEvents();
         }
-
-        private void RotateLever(float angle)
+        private void Rotate(float x, float z)
         {
-            if (limited)
-            {
-                if (angle > limit / 2)
-                {
-                    angle = limit / 2;
-                }
-
-                if (angle < -limit / 2)
-                {
-                    angle = -limit / 2;
-                }
-            }
-
-            interactableObject.transform.localRotation = Quaternion.Euler(angle, 0, 0);
-            currentNormalizedAngle = angle / (limit / 2);
+            var angleX = LimitAngle(x, limits.x);
+            var angleZ = LimitAngle(z, limits.z);
+            interactableObject.transform.localRotation = Quaternion.Euler(angleX, 0, angleZ);
+            _currentNormalizedAngle.x = angleX / (limits.x / 2);
+            _currentNormalizedAngle.z = angleZ / (limits.z / 2);
         }
-
         private void InvokeEvents()
         {
-            if (Math.Abs(currentNormalizedAngle - oldNormalizedAngle) > .1f)
+            var differenceX = _currentNormalizedAngle.x - _oldNormalizedAngle.x;
+            var differenceZ = _currentNormalizedAngle.z - _oldNormalizedAngle.z;
+            var absDifference = Mathf.Max(Mathf.Abs(differenceX), Mathf.Abs(differenceZ));
+            if (!(Math.Abs(absDifference) > .1f)) return;
+            onLeverChanged.Invoke(_currentNormalizedAngle);
+            _oldNormalizedAngle = _currentNormalizedAngle;
+        }
+
+        private float CalculateAngle(Vector3 plane)
+        {
+            //-transform.right
+            var direction = CurrentInteractor.transform.position - transform.position;
+            direction = Vector3.ProjectOnPlane(direction, -plane).normalized;
+            var angle = -Vector3.SignedAngle(direction, transform.up, plane);
+            return angle;
+        }
+
+        private float LimitAngle(float angle, float limit)
+        {
+            if (!limited) return angle;
+            if (angle > limit / 2)
             {
-                onAngleChanged.Invoke();
-                oldNormalizedAngle = currentNormalizedAngle;
-                if (currentNormalizedAngle > .9f)
-                {
-                    onOpen.Invoke();
-                }
+                angle = limit / 2;
+            }
 
-                if (currentNormalizedAngle < -.9f)
-                {
-                    onClose.Invoke();
-                }
+            if (angle < -limit / 2)
+            {
+                angle = -limit / 2;
+            }
 
-                if (currentNormalizedAngle < .1f && currentNormalizedAngle > -.1f)
-                {
-                    onMiddle.Invoke();
-                }
+            return angle;
+        }
+
+        #region private classes
+
+        [System.Serializable]
+        public struct XZPair
+        {
+            public float x, z;
+
+            public XZPair(float x, float z)
+            {
+                this.x = x;
+                this.z = z;
             }
         }
 
-        private float CalculateAngle()
+        [System.Serializable]
+        private class AngleChangeUnityEvent : UnityEvent<XZPair>
         {
-            var direction = CurrentInteractor.transform.position - transform.position;
-            direction = Vector3.ProjectOnPlane(direction, -transform.right).normalized;
-            var angle = -Vector3.SignedAngle(direction, transform.up, transform.right);
-            return angle;
         }
+
+        #endregion
     }
 }

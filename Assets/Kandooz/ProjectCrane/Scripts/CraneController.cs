@@ -35,7 +35,7 @@ namespace Kandooz
 
         private void MovePart(Rigidbody body, Vector3 direction, float value)
         {
-            if (value < .2f) return;
+            if (Mathf.Abs(value) < .2f) return;
             var velocity = body.velocity;
             velocity += direction * (acceleration * Time.fixedTime * value);
             velocity = Vector3.ClampMagnitude(velocity, speed);

@@ -1,4 +1,5 @@
 using System;
+using Kandooz.InteractionSystem.Core;
 using Kandooz.InteractionSystem.Interactions;
 using UniRx;
 using UnityEngine;
@@ -7,30 +8,38 @@ using UnityEngine.Serialization;
 namespace Kandooz
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class TruckController : MonoBehaviour, ICranePart
+    public class CraneController : MonoBehaviour
     {
+        [SerializeField] private LeverInteractable2D lever;
         [SerializeField] private float speed = 1;
         [SerializeField] private float acceleration;
-        [SerializeField] private Vector3 movementDirection;
-        private Rigidbody _rigidBody;
-        private float _direction = 0;
+        [SerializeField] private Vector3 craneDirection = Vector3.forward;
+        [SerializeField] private Vector3 truckDirection = Vector3.right;
+        [SerializeField] private Rigidbody craneBody;
+        [SerializeField] private Rigidbody truckBody;
+        [ReadOnly] [SerializeField] private Vector2 direction;
 
-        private void Awake()
+        private void Start()
         {
-            _rigidBody = GetComponent<Rigidbody>();
+            lever.OnLeverChanged
+                .Do(joyStick => direction = joyStick)
+                .Subscribe()
+                .AddTo(this);
         }
-        
 
         private void FixedUpdate()
         {
-            var velocity = _rigidBody.velocity;
-            velocity += movementDirection * (acceleration * Time.fixedTime * _direction);
-            velocity = Vector3.ClampMagnitude(velocity, speed);
-            _rigidBody.velocity = velocity;
+            MovePart(craneBody, craneDirection, -direction.y);
+            MovePart(truckBody, truckDirection, direction.x);
         }
-        public float Direction
+
+        private void MovePart(Rigidbody body, Vector3 direction, float value)
         {
-            set => _direction = value;
+            if (value < .2f) return;
+            var velocity = body.velocity;
+            velocity += direction * (acceleration * Time.fixedTime * value);
+            velocity = Vector3.ClampMagnitude(velocity, speed);
+            body.velocity = velocity;
         }
     }
 }

@@ -3,21 +3,24 @@ using UnityEngine;
 
 namespace Kandooz.InteractionSystem.Core
 {
+    /// <summary>
+    /// tweens a float between two values
+    /// </summary>
     public class TweenableFloat : ITweenable
     {
-        public event Action<float> onChange;
-        public event Action onFinished;
-        private float start;
-        private float target;
-        private float value;
-        private float rate;
-        private float t;
-        private VariableTweener lerper;
+        public event Action<float> OnChange;
+        public event Action OnFinished;
+        private float _start;
+        private float _target;
+        private float _value;
+        private float _rate;
+        private float _t;
+        private readonly VariableTweener _tweener;
         public float Value
         {
             get
             {
-                return value;
+                return _value;
             }
 
             set
@@ -26,30 +29,30 @@ namespace Kandooz.InteractionSystem.Core
                 if (UnityEditor.EditorApplication.isPlaying)
 #endif
                 {
-                    t = 0;
-                    start = this.value;
-                    target = value;
-                    lerper.AddTweenable(this);
+                    _t = 0;
+                    _start = this._value;
+                    _target = value;
+                    _tweener.AddTweenable(this);
                 }
 #if UNITY_EDITOR
                 else
                 {
-                    this.value = value;
-                    onChange(value);
+                    this._value = value;
+                    OnChange?.Invoke(value);
                 }
 #endif
             }
         }
 
-        public float Rate {  set => rate = value; }
+        public float Rate {  set => _rate = value; }
 
-        public TweenableFloat(VariableTweener lerper,Action<float> onChange=null, float rate = 2f, float value = 0)
+        public TweenableFloat(VariableTweener tweener,Action<float> onChange=null, float rate = 2f, float value = 0)
         {
-            start = target = this.value = value;
-            this.rate = rate;
-            this.t = 0;
-            this.onChange = onChange;
-            this.lerper = lerper;
+            _start = _target = this._value = value;
+            this._rate = rate;
+            this._t = 0;
+            this.OnChange = onChange;
+            this._tweener = tweener;
         }
 
 
@@ -63,15 +66,15 @@ namespace Kandooz.InteractionSystem.Core
             throw new NotImplementedException();
         }
 
-        public bool Tween(float scaledDetaTime)
+        public bool Tween(float scaledDeltaTime)
         {
-            t += rate * scaledDetaTime;
-            this.value = Mathf.Lerp(start, target, t);
-            onChange(value);
+            _t += _rate * scaledDeltaTime;
+            this._value = Mathf.Lerp(_start, _target, _t);
+            OnChange(_value);
 
-            if (t >= 1)
+            if (_t >= 1)
             {
-                onFinished?.Invoke();
+                OnFinished?.Invoke();
                 return true;
             }
             return false;

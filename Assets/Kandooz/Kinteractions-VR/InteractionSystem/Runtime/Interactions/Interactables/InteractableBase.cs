@@ -3,6 +3,7 @@ using Kandooz.Interactions;
 using Kandooz.InteractionSystem.Core;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Kandooz.InteractionSystem.Interactions
 {
@@ -17,15 +18,15 @@ namespace Kandooz.InteractionSystem.Interactions
     {
         [SerializeField] private InteractionHand interactionHand = (InteractionHand.Left | InteractionHand.Right);
         [SerializeField] private XRButton selectionButton= XRButton.Grip;
-        [SerializeField] private InteractorUnityEvent onSelected;
+        [SerializeField] public InteractorUnityEvent onSelected;
         [SerializeField] private InteractorUnityEvent onDeselected;
         [SerializeField] private InteractorUnityEvent onHoverStart;
         [SerializeField] private InteractorUnityEvent onHoverEnd;
         [SerializeField] private InteractorUnityEvent onActivated;
-        [SerializeField][ReadOnly] private bool isSelected;
+        [FormerlySerializedAs("isSelected")] [SerializeField][ReadOnly] private bool selected;
         [SerializeField][ReadOnly] private InteractorBase currentInteractor;
         [SerializeField][ReadOnly]private InteractionState currentState;
-        public bool IsSelected => isSelected;
+        public bool Selected => selected;
         public IObservable<InteractorBase> OnSelected => onSelected.AsObservable();
         public IObservable<InteractorBase> OnDeselected => onDeselected.AsObservable();
         public IObservable<InteractorBase> OnHoverStarted => onHoverStart.AsObservable();
@@ -52,18 +53,18 @@ namespace Kandooz.InteractionSystem.Interactions
 
         private void HandleNoneState()
         {
-            if (currentState == InteractionState.Selected)
+            switch (currentState)
             {
-                DeSelected();
-                isSelected = false;
-                onDeselected.Invoke(currentInteractor);
-                currentInteractor = null;
-            }
-
-            else if (currentState == InteractionState.Hovering)
-            {
-                EndHover();
-                onHoverEnd.Invoke(currentInteractor);
+                case InteractionState.Selected:
+                    DeSelected();
+                    selected = false;
+                    onDeselected.Invoke(currentInteractor);
+                    currentInteractor = null;
+                    break;
+                case InteractionState.Hovering:
+                    EndHover();
+                    onHoverEnd.Invoke(currentInteractor);
+                    break;
             }
 
             currentState = InteractionState.None;
@@ -74,7 +75,7 @@ namespace Kandooz.InteractionSystem.Interactions
         {
             if (currentState == InteractionState.Selected)
             {
-                isSelected = false;
+                selected = false;
                 onDeselected.Invoke(currentInteractor);
                 DeSelected();
             }
@@ -92,7 +93,7 @@ namespace Kandooz.InteractionSystem.Interactions
                 EndHover();
             }
 
-            isSelected = true;
+            selected = true;
             onSelected.Invoke(currentInteractor);
             Select();
             currentState = InteractionState.Selected;
@@ -107,11 +108,15 @@ namespace Kandooz.InteractionSystem.Interactions
             }
         }
 
-        protected abstract void Activate();
-        protected abstract void StartHover();
-        protected abstract void EndHover();
-        protected abstract void Select();
-        protected abstract void DeSelected();
+        protected virtual void Activate() { }
+
+        protected virtual void StartHover() { }
+
+        protected virtual void EndHover() { }
+
+        protected virtual void Select() { }
+
+        protected virtual void DeSelected() { }
 
         public bool IsValidHand(HandIdentifier hand)
         {

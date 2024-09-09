@@ -50,7 +50,7 @@ namespace Kandooz.InteractionSystem.Core
 
             var leverObject = new GameObject(selectedObject.name).transform;
             leverObject.transform.position = selectedObject.transform.position;
-            InitializeConstrainedInteractable<LeverInteractable>(leverObject, selectedObject);
+            InitializeConstrainedInteractable<LeverInteractable1D>(leverObject, selectedObject);
             Selection.activeGameObject = leverObject.gameObject;
         }
 
@@ -72,6 +72,34 @@ namespace Kandooz.InteractionSystem.Core
             var drawerObject = new GameObject(selectedObject.name).transform;
             InitializeConstrainedInteractable<LinearlyConstrainedInteractable>(drawerObject, selectedObject);
             Selection.activeGameObject = drawerObject.gameObject;
+        }
+        [MenuItem("GameObject/Kandooz/Initialize CameraRig", priority = 0)]
+        [MenuItem("Kandooz/Initialize Scene", priority = 0)]
+
+        public static void InitializeScene()
+        {
+            DestroyOldRigAndCamera();
+            var cameraRig = Resources.Load<CameraRig>("CameraRig");
+            PrefabUtility.InstantiatePrefab(cameraRig);
+            Resources.UnloadAsset(cameraRig);
+
+        }
+
+        private static void DestroyOldRigAndCamera()
+        {
+            var rig = FindFirstObjectByType<CameraRig>();
+            if (rig) Destroy(rig.gameObject);
+            else
+            {
+                var cameras = FindObjectsByType<Camera>(FindObjectsSortMode.None);
+                foreach (var camera in cameras)
+                {
+                    if (camera.CompareTag("MainCamera"))
+                    {
+                        Destroy(camera.gameObject);
+                    }
+                }
+            }
         }
 
         private static GameObject CreateLever()

@@ -1,4 +1,5 @@
 using System;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ namespace Kandooz.InteractionSystem.Interactions
         [SerializeField] private bool isClicked;
         [SerializeField] private float pressSpeed = 10;
         private float t = 0;
+        public IObservable<Unit> OnClick => onClick.AsObservable();
 
         public Transform Button
         {

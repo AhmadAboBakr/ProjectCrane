@@ -3,25 +3,28 @@ using UnityEngine;
 
 namespace Kandooz.InteractionSystem.Core
 {
+    /// <summary>
+    /// Tweens multiple tweenable objects and adds them to 
+    /// </summary>
     public class VariableTweener : MonoBehaviour
     {
-        public float tweenScale = 1f;
-        private List<ITweenable> values= new();
+        public float tweenScale = 12f;
+        private List<ITweenable> _values= new();
 
         private void OnEnable()
         {
-            values = new List<ITweenable>();
+            _values = new List<ITweenable>();
         }
         public void AddTweenable(ITweenable value)
         {
-            values.Add(value);
+            _values.Add(value);
         }
 
         public void RemoveTweenable(ITweenable value)
         {
             try
             {
-                values.Remove(value);
+                _values.Remove(value);
             }
             catch
             {
@@ -30,11 +33,11 @@ namespace Kandooz.InteractionSystem.Core
         }
         void Update()
         {
-            for (int i = values.Count - 1; i >= 0; i--)
+            for (int i = _values.Count - 1; i >= 0; i--)
             {
-                if (values[i].Tween(Time.deltaTime * tweenScale))
+                if (_values[i].Tween(Time.deltaTime * tweenScale))
                 {
-                    values.RemoveAt(i);
+                    _values.RemoveAt(i);
                 }
             }
         }

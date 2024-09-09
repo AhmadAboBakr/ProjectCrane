@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Kandooz.InteractionSystem.Animations;
 using Kandooz.InteractionSystem.Interactions;
 using UnityEngine;
@@ -13,109 +12,90 @@ namespace Kandooz.InteractionSystem.Core
 
     public class CameraRig : MonoBehaviour
     {
-        [SerializeField] private Transform offsetObject;
-        [SerializeField] private Transform leftHand;
-        [SerializeField] private Transform rightHand;
-        [SerializeField] private InteractionSystemType interactionSystemType;
-        [SerializeField] private HandPoseData poseData;
         [SerializeField] private Config config;
-        [SerializeField] private float playerHeight;
-        [SerializeField] private bool initializeLayers;
-        [SerializeField] private Camera mainCamera;
-        [SerializeField] private KeyCode resetButton;
+        [SerializeField] [HideInInspector] private bool initializeHands = true;
+        [SerializeField] [HideInInspector] private InteractionSystemType handTrackingMethod = InteractionSystemType.PhysicsBased;
+        [SerializeField] [HideInInspector] private Transform leftHandPivot;
+        [SerializeField] [HideInInspector] private Transform rightHandPivot;
+        [SerializeField] [HideInInspector] private bool initializeLayers;
 
-        private HandPoseController leftPoseController, rightPoseController;
-        public HandPoseController LeftHandPrefab => poseData.LeftHandPrefab;
-        public HandPoseController RightHandPrefab => poseData.RightHandPrefab;
+        private HandPoseController _leftPoseController, _rightPoseController;
+        public HandPoseController LeftHandPrefab => config.HandData.LeftHandPrefab;
+        public HandPoseController RightHandPrefab => config.HandData.RightHandPrefab;
         public Config Config => config;
 
         private void Awake()
         {
-            switch (interactionSystemType)
+            CreateAndItializeHands();
+            InitializeLayers();
+        }
+
+        private void InitializeLayers()
+        {
+            if (!initializeLayers) return;
+
+            ChangeLayerRecursive(transform, config.PlayerLayer);
+            ChangeLayerRecursive(leftHandPivot, config.LeftHandLayer);
+            ChangeLayerRecursive(rightHandPivot, config.RightHandLayer);
+        }
+
+        private void CreateAndItializeHands()
+        {
+            if (!initializeHands) return;
+            switch (handTrackingMethod)
             {
                 case InteractionSystemType.TransformBased:
-
+                    InitializeHands();
                     break;
                 case InteractionSystemType.PhysicsBased:
                     InitializePhysicsBasedHands();
                     break;
             }
-            if(!initializeLayers)return; 
-                
-            ChangeLayerRecursive(transform, config.PlayerLayer);
-            ChangeLayerRecursive(leftHand, config.LeftHandLayer);
-            ChangeLayerRecursive(rightHand, config.RightHandLayer);
         }
 
-        static void ChangeLayerRecursive(Transform transform, int layer)
+        private static void ChangeLayerRecursive(Transform transform, int layer)
         {
-
             transform.gameObject.layer = layer;
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                ChangeLayerRecursive(transform.GetChild(i), layer);
-            }
+            for (var i = 0; i < transform.childCount; i++) ChangeLayerRecursive(transform.GetChild(i), layer);
         }
 
         private void InitializePhysicsBasedHands()
         {
             InitializeHands();
+            InitializePhysics(_rightPoseController.gameObject, rightHandPivot);
+            InitializePhysics(_leftPoseController.gameObject, leftHandPivot);
         }
 
         private void InitializeHands()
         {
-            rightPoseController = InitializeHand(RightHandPrefab, rightHand, HandIdentifier.Right);
-            leftPoseController = InitializeHand(LeftHandPrefab, leftHand, HandIdentifier.Left);
-            InitializePhysics(rightPoseController.gameObject, rightHand);
-            InitializePhysics(leftPoseController.gameObject, leftHand);
+            _rightPoseController = InitializeHand(RightHandPrefab, rightHandPivot, HandIdentifier.Right);
+            _leftPoseController = InitializeHand(LeftHandPrefab, leftHandPivot, HandIdentifier.Left);
         }
 
-        private static void InitializePhysics(GameObject hand, Transform target)
+        private void InitializePhysics(GameObject hand, Transform target)
         {
-            // TODO: the values should be moved to the config file 
-
             var rb = hand.GetComponent<Rigidbody>();
             if (rb == null) rb = hand.AddComponent<Rigidbody>();
-            rb.mass = 40;
-            rb.drag = 5;
-            rb.angularDrag = 1;
+            rb.mass = config.HandMass;
+            rb.drag = config.HandLinearDamping;
+            rb.angularDrag = config.HandAngularDamping;
             var follower = hand.AddComponent<PhysicsHandFollwer>();
             follower.Target = target;
         }
 
         private HandPoseController InitializeHand(HandPoseController handPrefab, Transform handPivot, HandIdentifier handIdentifier)
         {
-            var poseController = handPivot.GetComponentInChildren<HandPoseController>();
-            if (poseController != null) return poseController;
-
-            poseController = Instantiate(handPrefab, handPivot);
-            poseController.transform.localPosition = Vector3.zero;
-            poseController.transform.localRotation = Quaternion.identity;
-            var hand = poseController.gameObject;
-            var handController = hand.AddComponent<Hand>();
+            var hand = Instantiate(handPrefab, handPivot);
+            var handTransform = hand.transform;
+            handTransform.localPosition = Vector3.zero;
+            handTransform.localRotation = Quaternion.identity;
+            var handGameObject = hand.gameObject;
+            var handController = handGameObject.GetComponent<Hand>();
+            handController ??= handGameObject.AddComponent<Hand>();
             handController.HandIdentifier = handIdentifier;
             handController.Config = config;
-            hand.AddComponent<TriggerInteractor>();
-            return poseController;
-        }
-
-        public async void ResetPosition()
-        {
-            var cameraPosition = mainCamera.transform.localPosition;
-            cameraPosition.y = 0;
-            offsetObject.transform.localPosition = -cameraPosition;
-            await Task.Delay(200);  
-            var yRotation = mainCamera.transform.localRotation.eulerAngles.y;
-            var angles = offsetObject.localRotation.eulerAngles;
-            angles.y = -yRotation;
-            offsetObject.localRotation = Quaternion.Euler(angles);
-        }
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                ResetPosition();
-            }
+            handGameObject.AddComponent<TriggerInteractor>();
+            return hand;
         }
     }
 }

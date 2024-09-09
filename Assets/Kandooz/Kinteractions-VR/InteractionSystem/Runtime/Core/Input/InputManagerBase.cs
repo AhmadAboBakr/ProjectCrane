@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
-
+using UniRx;
 namespace Kandooz.InteractionSystem.Core
 {
     public abstract class InputManagerBase : MonoBehaviour
     {
-        protected readonly HandInputManagerImpl leftHand = new();
-        protected readonly HandInputManagerImpl rightHand = new();
+        protected readonly HandInputManagerImpl LeftHand = new();
+        protected readonly HandInputManagerImpl RightHand = new();
 
         public IHandInputManager this[HandIdentifier index]
         {
@@ -14,8 +14,8 @@ namespace Kandooz.InteractionSystem.Core
             {
                 return index switch
                 {
-                    HandIdentifier.Left => leftHand,
-                    HandIdentifier.Right => rightHand,
+                    HandIdentifier.Left => LeftHand,
+                    HandIdentifier.Right => RightHand,
                     _ => null
                 };
             }
@@ -32,21 +32,21 @@ namespace Kandooz.InteractionSystem.Core
 
         protected class HandInputManagerImpl : IHandInputManager
         {
-            internal readonly ButtonObservable triggerObserver = new();
-            internal readonly ButtonObservable gripObserver = new();
-            internal readonly ButtonObservable aButtonObserver = new();
-            internal readonly ButtonObservable bButtonObserver = new();
-            internal readonly float[] fingers = new float[5];
+            internal readonly ButtonObservable TriggerObserver = new();
+            internal readonly ButtonObservable GripObserver = new();
+            internal readonly ButtonObservable ButtonAObserver = new();
+            internal readonly ButtonObservable ButtonBObserver = new();
+            private readonly float[] _fingers = new float[5];
 
-            public IObservable<ButtonState> TriggerObservable => triggerObserver;
-            public IObservable<ButtonState> GripObservable => gripObserver;
-            public IObservable<ButtonState> AButtonObserver => aButtonObserver;
-            public IObservable<ButtonState> BButtonObserver => bButtonObserver;
+            public IObservable<ButtonState> TriggerObservable => TriggerObserver.OnStateChanged;
+            public IObservable<ButtonState> GripObservable => GripObserver.OnStateChanged;
+            public IObservable<ButtonState> AButtonObserver => ButtonAObserver.OnStateChanged;
+            public IObservable<ButtonState> BButtonObserver => ButtonBObserver.OnStateChanged;
 
             public float this[int index]
             {
-                get => fingers[index];
-                set => fingers[index] = value;
+                get => _fingers[index];
+                set => _fingers[index] = value;
             }
         }
     }

@@ -24,8 +24,9 @@ namespace Kandooz.InteractionSystem.Core
             maxVelocitySqrt = maxVelocity * maxVelocity;
             body = GetComponent<Rigidbody>();
             timeInverse = 1 / Time.fixedDeltaTime;
-            transform.parent = null;
+            transform.parent = FindAnyObjectByType<CameraRig>().transform;
             Teleport();
+            
         }
 
         void FixedUpdate()

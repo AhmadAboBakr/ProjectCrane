@@ -1,22 +1,23 @@
 using UnityEngine;
 
 namespace Kandooz.InteractionSystem.Core
-{
-
+{/// <summary>
+ /// should only be used for debugging purposes
+ /// </summary>
     public class KeyboardBasedInput : InputManagerBase
     {
         private void Update()
         {
-            leftHand[1] = Input.GetKey(KeyCode.LeftControl) ? 1 : 0;
-            leftHand[2] = leftHand[3] = leftHand[4] = Input.GetKey(KeyCode.LeftAlt) ? 1 : 0;
+            LeftHand[1] = Input.GetKey(KeyCode.LeftControl) ? 1 : 0;
+            LeftHand[2] = LeftHand[3] = LeftHand[4] = Input.GetKey(KeyCode.LeftAlt) ? 1 : 0;
 
-            leftHand.triggerObserver.ButtonState = Input.GetKey(KeyCode.LeftControl);
-            leftHand.gripObserver.ButtonState = Input.GetKey(KeyCode.LeftAlt);
+            LeftHand.TriggerObserver.ButtonState = Input.GetKey(KeyCode.LeftControl);
+            LeftHand.GripObserver.ButtonState = Input.GetKey(KeyCode.LeftAlt);
 
-            rightHand[1] = Input.GetKey(KeyCode.RightControl) ? 1 : 0;
-            rightHand[2] = rightHand[3] = rightHand[4] = Input.GetKey(KeyCode.RightAlt) ? 1 : 0;
+            RightHand[1] = Input.GetKey(KeyCode.RightControl) ? 1 : 0;
+            RightHand[2] = RightHand[3] = RightHand[4] = Input.GetKey(KeyCode.RightAlt) ? 1 : 0;
 
-            rightHand.triggerObserver.ButtonState = Input.GetKey(KeyCode.RightControl);
-            rightHand.gripObserver.ButtonState = Input.GetKey(KeyCode.RightAlt);
+            RightHand.TriggerObserver.ButtonState = Input.GetKey(KeyCode.RightControl);
+            RightHand.GripObserver.ButtonState = Input.GetKey(KeyCode.RightAlt);
         }
     }}

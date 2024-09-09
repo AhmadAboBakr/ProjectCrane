@@ -23,7 +23,10 @@ namespace Kandooz.InteractionSystem.Interactions
             velocityList = new Vector3[iterations];
             dtInverse = 1 / Time.fixedDeltaTime;
             body = GetComponent<Rigidbody>();
-            grabable.OnSelected.Do(OnSelected).Subscribe().AddTo(this);
+            grabable.OnSelected
+                .Do(OnSelected)
+                .Do(_=>{})
+                .Subscribe().AddTo(this);
             grabable.OnDeselected.Do(OnSelected).Subscribe().AddTo(this); 
 
         }

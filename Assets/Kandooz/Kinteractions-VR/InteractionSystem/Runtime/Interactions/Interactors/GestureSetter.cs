@@ -1,21 +1,23 @@
-using System;
 using Kandooz.InteractionSystem.Core;
 using UnityEngine;
 
 namespace Kandooz.InteractionSystem.Interactions
 {
+    /// <summary>
+    /// sets a Gesture scriptable object based on the pose the player is making
+    /// </summary>
     [RequireComponent(typeof(Hand))]
     public class GestureSetter : MonoBehaviour
     {
         [SerializeField] private GestureVariable gestureVariable;
-        private Hand hand;
-        private bool thumb;
-        private bool index;
-        private bool grip;
+        private Hand _hand;
+        private bool _thumb;
+        private bool _index;
+        private bool _grip;
 
         private void Awake()
         {
-            hand = GetComponent<Hand>();
+            _hand = GetComponent<Hand>();
         }
 
         private void Update()
@@ -26,35 +28,32 @@ namespace Kandooz.InteractionSystem.Interactions
 
         private void SetGesture()
         {
-            if (thumb)
+            if (_thumb)
             {
-                if (grip)
+                if (_grip)
                 {
-                    if (index)
-                        gestureVariable.value = Gesture.Fist;
-                    else
-                        gestureVariable.value = Gesture.Pointing;
+                    gestureVariable.value = _index ? Gesture.Fist : Gesture.Pointing;
                 }
-                else if (!index)
+                else if (!_index)
                 {
                     gestureVariable.value = Gesture.Three;
                 }
             }
-            else if (grip)
+            else if (_grip)
             {
-                gestureVariable.value = index ? Gesture.ThumbsUp : Gesture.Pointing;
+                gestureVariable.value = _index ? Gesture.ThumbsUp : Gesture.Pointing;
             }
             else
             {
-                gestureVariable.value = index ? Gesture.None : Gesture.relaxed;
+                gestureVariable.value = _index ? Gesture.None : Gesture.Relaxed;
             }
         }
 
         private void ReadFingerStatus()
         {
-            thumb = hand[FingerName.Thumb] > .5f;
-            index = hand[FingerName.Index] > .5f;
-            grip = hand[FingerName.Middle] > .5f;
+            _thumb = _hand[FingerName.Thumb] > .5f;
+            _index = _hand[FingerName.Index] > .5f;
+            _grip = _hand[FingerName.Middle] > .5f;
         }
     }
 }

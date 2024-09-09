@@ -4,6 +4,7 @@ namespace Kandooz.InteractionSystem.Core
 {
     public class XRButtonObserver : IObserver<ButtonState>
     {
+        //todo: rewrite to use uniRX
         private readonly Action onComplete;
         private readonly Action<Exception> onExceptionRaised;
         private readonly Action<ButtonState> onButtonStateChanged;

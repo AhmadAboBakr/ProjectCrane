@@ -22,6 +22,7 @@ namespace Kandooz.InteractionSystem.Interactions
         private (Vector3 position, Quaternion rotation) leftHandPivot;
         private (Vector3 position, Quaternion rotation) rightHandPivot;
         private Transform fakeHandTransform;
+        private Collider[] _colliders;
 
         private (Vector3 position, Quaternion rotation) currentPivot;
         private float positionLerper;
@@ -33,8 +34,9 @@ namespace Kandooz.InteractionSystem.Interactions
 
         protected override void Select()
         {
-            if (constraintsType == HandConstrainType.FreeHand)
-                return;
+
+            ToggleColliders(false);
+            if (constraintsType == HandConstrainType.FreeHand) return;
             CurrentInteractor.ToggleHandModel(false);
             if (constraintsType == HandConstrainType.HideHand)
                 return;
@@ -56,8 +58,19 @@ namespace Kandooz.InteractionSystem.Interactions
             }
         }
 
+        private void ToggleColliders(bool enabled)
+        {
+            _colliders ??= GetComponentsInChildren<Collider>();
+            foreach (var collider in _colliders)
+            {
+                collider.enabled = enabled;
+            }
+        }
+
         protected override void DeSelected()
         {
+            ToggleColliders(true);
+
             CurrentInteractor.ToggleHandModel(true);
             leftHand.gameObject.SetActive(false);
             rightHand.gameObject.SetActive(false);
@@ -77,7 +90,7 @@ namespace Kandooz.InteractionSystem.Interactions
                 rotation = rightHand.transform.localRotation
             };
             this.UpdateAsObservable()
-                .Where(_ => IsSelected)
+                .Where(_ => Selected)
                 .Where(_ => constraintsType == HandConstrainType.Constrained && smoothHandTransition)
                 .Do(_ => SetInteractionHandPosition()).Subscribe().AddTo(this);
         }

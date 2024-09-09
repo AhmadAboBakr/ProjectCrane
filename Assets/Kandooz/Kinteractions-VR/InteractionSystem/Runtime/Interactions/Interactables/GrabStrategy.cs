@@ -20,7 +20,10 @@ namespace Kandooz.InteractionSystem.Interactions
                 collisionLayers[i] = colliders[i].gameObject.layer;
             }
         }
-
+        /// <summary>
+         /// initializes the GrabStrategy 
+         /// </summary>
+         /// <param name="interactor"></param>
         public void Initialize(InteractorBase interactor)
         {
             foreach (var collider in colliders)

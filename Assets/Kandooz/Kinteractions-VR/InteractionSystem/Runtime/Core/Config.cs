@@ -1,25 +1,35 @@
 using System.Runtime.CompilerServices;
+using Kandooz.InteractionSystem.Animations;
 using UnityEngine;
+
 [assembly: InternalsVisibleTo("Kandooz.Interactions.Editor")]
 
 namespace Kandooz.InteractionSystem.Core
 {
-    [CreateAssetMenu]
-
+    /// <summary>
+    /// The config class configures the layers and the default input manager to be used by the system
+    /// </summary>
+    [CreateAssetMenu(order = 10, menuName = "Kandooz/Interaction System/Config")]
     public class Config : ScriptableObject
     {
-        [SerializeField] private InputManagerBase inputManager;
+        [SerializeField] private HandData handData;
         [SerializeField] private LayerMask leftHandLayer;
         [SerializeField] private LayerMask rightHandLayer;
         [SerializeField] private LayerMask interactableLayer;
-        [SerializeField] private LayerMask teleportationLayer;
         [SerializeField] private LayerMask playerLayer;
-        [SerializeField] private GameObject gameManager;
         [SerializeField] private InputManagerType inputType;
+
+        [Header("Hand Physics Data")] 
+        [SerializeField] private float handMass = 30;
+
+        [SerializeField] private float linearDamping = 5, angularDamping = 1;
+        [Core.ReadOnly,SerializeField] private GameObject gameManager;
+
+        [Core.ReadOnly] [SerializeField] private InputManagerBase inputManager;
 
         public int LeftHandLayer
         {
-            get => (int) (Mathf.Log(leftHandLayer,2)+.5f);
+            get => (int)(Mathf.Log(leftHandLayer, 2) + .5f);
             internal set => leftHandLayer = value;
         }
 
@@ -31,21 +41,19 @@ namespace Kandooz.InteractionSystem.Core
 
         public int InteractableLayer
         {
-            get => (int) (Mathf.Log(interactableLayer,2)+.5f);
+            get => (int)(Mathf.Log(interactableLayer, 2) + .5f);
             internal set => interactableLayer = value;
         }
 
-        public int TeleportationLayer
-        {
-            get => (int) (Mathf.Log(teleportationLayer,2)+.5f);
-            internal set => teleportationLayer = value;
-        }
-        
+     
+
         public int PlayerLayer
         {
             get => (int)(Mathf.Log(playerLayer, 2) + .5f);
             internal set => playerLayer = value;
         }
+
+        public HandData HandData => handData;
 
         public InputManagerBase InputManager
         {
@@ -58,6 +66,10 @@ namespace Kandooz.InteractionSystem.Core
                 return CreateInputManager();
             }
         }
+
+        public float HandMass => handMass;
+        public float HandLinearDamping => linearDamping;
+        public float HandAngularDamping => angularDamping;
 
         private InputManagerBase CreateInputManager()
         {

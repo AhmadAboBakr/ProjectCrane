@@ -12,38 +12,28 @@ namespace Kandooz.InteractionSystem.Core.Editors
         {
             rig = (CameraRig)target;
             var hands = rig.GetComponentsInChildren<Hand>();
-            SetHandSourceIfEmpty(serializedObject.FindProperty("leftHand"), hands,  HandIdentifier.Left);
-            SetHandSourceIfEmpty(serializedObject.FindProperty("rightHand"), hands,  HandIdentifier.Right);
-            serializedObject.ApplyModifiedProperties();
         }
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-            
-        }
-
-        private static void SetHandSourceIfEmpty(SerializedProperty handSerializedProperty, Hand[] hands, HandIdentifier handSource)
-        {
-            if (handSerializedProperty.objectReferenceValue == null)
+            DrawDefaultInspector();
+            if (rig.Config == null)
             {
-                var handObject = GetHandObject(hands, handSource);
-                handSerializedProperty.objectReferenceValue = handObject;
-            }
-        }
-
-        private static Hand GetHandObject(Hand[] hands,HandIdentifier handIdentifier)
-        {
-            Hand handObject = null;
-            foreach (var hand in hands)
-            {
-                if (hand.HandIdentifier ==handIdentifier)
-                {
-                    handObject = hand;
-                }
+                EditorGUILayout.LabelField("Select a config file to continue");
+                return;
             }
 
-            return handObject;
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("initializeHands"));
+
+            if (serializedObject.FindProperty("initializeHands").boolValue)
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("handTrackingMethod"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("leftHandPivot"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("rightHandPivot"));
+            }
+
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("initializeLayers"));
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

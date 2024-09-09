@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Kandooz.InteractionSystem.Core
 {
+    /// <summary>
+    /// changes the material color of all child renderers onHover event 
+    /// </summary>
     [RequireComponent(typeof(InteractableBase))]
     public class MaterialHighlighter : MonoBehaviour
     {

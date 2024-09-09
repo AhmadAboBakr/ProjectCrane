@@ -1,4 +1,3 @@
-
 using Kandooz.Interactions;
 using Kandooz.InteractionSystem.Core;
 using UnityEngine;
@@ -9,28 +8,37 @@ namespace Kandooz.InteractionSystem.Interactions
     {
         //TODO: rewrite to make it support pairs of colliders/interactables
         [ReadOnly][SerializeField] private Collider currentCollider;
-        private int frameCounter;
+        private int _frameCounter;
         private void OnTriggerEnter(Collider other)
         {
             if (isInteracting) return;
             var interactable = other.GetComponentInParent<InteractableBase>();
             if (!interactable || interactable == currentInteractable) return;
-            if (!ShouldChangeInteractable( interactable)) return;
+            if (!ShouldChangeInteractable(interactable)) return;
             ChangeInteractable(interactable);
             currentCollider = other;
         }
 
-        private void ChangeInteractable( InteractableBase interactable)
+        private void ChangeInteractable(InteractableBase interactable)
         {
-            try { if (currentInteractable) OnHoverEnd(); } catch { }
+            try { if (currentInteractable) OnHoverEnd(); }
+            catch
+            {
+                // ignored
+            }
+
             currentInteractable = interactable;
-            try { if (currentInteractable) OnHoverStart(); } catch { };
+            try { if (currentInteractable) OnHoverStart(); }
+            catch
+            {
+                // ignored
+            }
         }
 
-        private bool ShouldChangeInteractable(InteractableBase interactable )
+        private bool ShouldChangeInteractable(InteractableBase interactable)
         {
             return true;
-            if(currentInteractable == null) return true;
+            if (currentInteractable == null) return true;
             var interactableDistance = (transform.position - interactable.transform.position).sqrMagnitude;
             var currentInteractableDistance = (transform.position - currentInteractable.transform.position).sqrMagnitude;
             return currentInteractableDistance > interactableDistance;
@@ -38,18 +46,18 @@ namespace Kandooz.InteractionSystem.Interactions
 
         private void OnTriggerExit(Collider other)
         {
-            if(IsInteracting) { return; }
+            if (IsInteracting) { return; }
             if (other == currentCollider)
             {
                 ChangeInteractable(null);
                 return;
             }
             var interactable = other.GetComponent<InteractableBase>();
-            
+
             if (currentInteractable != null && currentInteractable.CurrentState == InteractionState.Selected) return;
             if (interactable == currentInteractable)
             {
-                    ChangeInteractable(null);
+                ChangeInteractable(null);
             }
         }
         protected override void OnHoverEnd()

@@ -21,7 +21,7 @@ namespace Kandooz.InteractionSystem.Interactions
 
         private void Update()
         {
-            if (!IsSelected) return;
+            if (!Selected) return;
             interactableObject.transform.position =
                 GetPositionBetweenTwoPoints(
                     CurrentInteractor.transform.position,

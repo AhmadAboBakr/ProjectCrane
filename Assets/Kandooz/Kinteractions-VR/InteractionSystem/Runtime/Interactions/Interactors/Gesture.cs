@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 namespace Kandooz.InteractionSystem.Interactions
 {
     public enum Gesture 
     {
-        relaxed,
+        Relaxed,
         Pointing,
         ThumbsUp,
         Three,

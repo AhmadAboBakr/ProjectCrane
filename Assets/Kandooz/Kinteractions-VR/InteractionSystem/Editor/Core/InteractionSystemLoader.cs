@@ -15,7 +15,6 @@ namespace Kandooz.InteractionSystem.Core.Editors
         private const string LEFT_INTERACTOR_LAYER_NAME = "XRI_LeftInteractor";
         private const string RIGHT_INTERACTOR_LAYER_NAME = "XRI_RightInteractor";
         private const string INTERACTABLE_LAYER_NAME = "XRI_Interactable";
-        private const string TELEPORTATION_LAYER_NAME = "XRI_Teleportation";
 
 
         /// <summary>
@@ -272,8 +271,6 @@ namespace Kandooz.InteractionSystem.Core.Editors
                 serializedConfigFile.FindProperty("leftHandLayer").intValue = 1 << LayerMask.NameToLayer(LEFT_INTERACTOR_LAYER_NAME);
                 serializedConfigFile.FindProperty("rightHandLayer").intValue = 1 << LayerMask.NameToLayer(RIGHT_INTERACTOR_LAYER_NAME);
                 serializedConfigFile.FindProperty("interactableLayer").intValue = 1 << LayerMask.NameToLayer(INTERACTABLE_LAYER_NAME);
-                serializedConfigFile.FindProperty("interactableLayer").intValue = 1 << LayerMask.NameToLayer(TELEPORTATION_LAYER_NAME);
-                configFile.PlayerLayer = 1 << LayerMask.NameToLayer(TELEPORTATION_LAYER_NAME);
                 serializedConfigFile.FindProperty("playerLayer").intValue = 1 << LayerMask.NameToLayer(PLAYER_LAYER_NAME);
                 serializedConfigFile.ApplyModifiedProperties();
             }
@@ -290,7 +287,6 @@ namespace Kandooz.InteractionSystem.Core.Editors
                 LEFT_INTERACTOR_LAYER_NAME,
                 RIGHT_INTERACTOR_LAYER_NAME,
                 INTERACTABLE_LAYER_NAME,
-                TELEPORTATION_LAYER_NAME,
                 PLAYER_LAYER_NAME
             };
             while (index < 32 && count < layersName.Length)

@@ -32,34 +32,41 @@ namespace Kandooz.InteractionSystem.Interactions
             GetDependencies();
             InitializeAttachmentPoint();
             _onInteractionStateChanged
-                .Do((state) =>
-                {
-                    if (currentInteractable is null) return;
-                    switch (state)
-                    {
-                        case ButtonState.Up:
-                            if (currentInteractable.CurrentState == InteractionState.Selected && currentInteractable.CurrentInteractor == this) OnDeSelect();
-
-                            break;
-                        case ButtonState.Down:
-                            if (currentInteractable.CurrentState == InteractionState.Hovering) OnSelect();
-
-                            break;
-                    }
-                })
+                .Do(HandleSelectionButton)
                 .Subscribe().AddTo(this);
             _onActivate
-                .Do((state) =>
-                {
-                    if (currentInteractable is null) return;
-                    switch (state)
-                    {
-                        case ButtonState.Down:
-                            OnActivate();
-                            break;
-                    }
-                })
+                .Do(HandleActivationButton)
                 .Subscribe().AddTo(this);
+        }
+
+        private void HandleActivationButton(ButtonState state)
+        {
+            if (currentInteractable is null) return;
+            switch (state)
+            {
+                case ButtonState.Down:
+                    OnActivate(true);
+                    break;
+                case ButtonState.Up:
+                    OnActivate(false);
+                    break;
+            }
+        }
+
+        private void HandleSelectionButton(ButtonState state)
+        {
+            if (currentInteractable is null) return;
+            switch (state)
+            {
+                case ButtonState.Up:
+                    if (currentInteractable.CurrentState == InteractionState.Selected && currentInteractable.CurrentInteractor == this) OnDeSelect();
+
+                    break;
+                case ButtonState.Down:
+                    if (currentInteractable.CurrentState == InteractionState.Hovering) OnSelect();
+
+                    break;
+            }
         }
 
 
@@ -124,11 +131,11 @@ namespace Kandooz.InteractionSystem.Interactions
             OnHoverStart();
         }
 
-        private void OnActivate()
+        private void OnActivate(bool activated)
         {
             if (!currentInteractable) return;
-
-            currentInteractable.OnStateChanged(InteractionState.Activated, this);
+            currentInteractable.OnStateChanged(
+                activated ? InteractionState.Activated : InteractionState.Selected, this);
         }
     }
 }

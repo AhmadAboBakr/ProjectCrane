@@ -42,6 +42,7 @@ namespace Kandooz.InteractionSystem.Interactions
 
             var angle = CalculateAngle(direction, normal, zero);
             if (limited) angle = LimitAngle(angle, min, max);
+            currentNormalizedAngle = 2 * (angle - min) / (max - min) - 1;
             return CalculateQuaternion();
 
             Quaternion CalculateQuaternion()

@@ -11,44 +11,57 @@ namespace Kandooz.InteractionSystem.Interactions
     public enum InteractionHand
     {
         Left = 1,
-        Right = 2,
+        Right = 2
     }
 
     public abstract class InteractableBase : MonoBehaviour
     {
-        [SerializeField] private InteractionHand interactionHand = (InteractionHand.Left | InteractionHand.Right);
-        [SerializeField] private XRButton selectionButton= XRButton.Grip;
+        [SerializeField] private InteractionHand interactionHand = InteractionHand.Left | InteractionHand.Right;
+        [SerializeField] private XRButton selectionButton = XRButton.Grip;
         [SerializeField] public InteractorUnityEvent onSelected;
         [SerializeField] private InteractorUnityEvent onDeselected;
         [SerializeField] private InteractorUnityEvent onHoverStart;
         [SerializeField] private InteractorUnityEvent onHoverEnd;
         [SerializeField] private InteractorUnityEvent onActivated;
-        [FormerlySerializedAs("isSelected")] [SerializeField][ReadOnly] private bool selected;
-        [SerializeField][ReadOnly] private InteractorBase currentInteractor;
-        [SerializeField][ReadOnly]private InteractionState currentState;
+        [SerializeField] private InteractorUnityEvent onDeactivated;
+
+        [FormerlySerializedAs("isSelected")] [SerializeField] [ReadOnly]
+        private bool selected;
+
+        [SerializeField] [ReadOnly] private InteractorBase currentInteractor;
+        [SerializeField] [ReadOnly] private InteractionState currentState;
+        private bool _activated;
         public bool Selected => selected;
         public IObservable<InteractorBase> OnSelected => onSelected.AsObservable();
         public IObservable<InteractorBase> OnDeselected => onDeselected.AsObservable();
         public IObservable<InteractorBase> OnHoverStarted => onHoverStart.AsObservable();
         public IObservable<InteractorBase> OnHoverEnded => onHoverEnd.AsObservable();
         public IObservable<InteractorBase> OnActivated => onActivated.AsObservable();
+        public IObservable<InteractorBase> OnDeactivated => onDeactivated.AsObservable();
         public XRButton SelectionButton => selectionButton;
         public InteractionState CurrentState => currentState;
         internal InteractorBase CurrentInteractor => currentInteractor;
-        
+
 
         public void OnStateChanged(InteractionState state, InteractorBase interactor)
         {
-            if (this.currentState == state) return;
+            if (currentState == state) return;
             currentInteractor = interactor;
-            if (state == InteractionState.None)
-                HandleNoneState();
-            else if (state == InteractionState.Hovering)
-                HandleHoverState();
-            else if (state == InteractionState.Selected)
-                HandleSelectionState();
-            else if (state == InteractionState.Activated)
-                HandleActiveState();
+            switch (state)
+            {
+                case InteractionState.None:
+                    HandleNoneState();
+                    break;
+                case InteractionState.Hovering:
+                    HandleHoverState();
+                    break;
+                case InteractionState.Selected:
+                    HandleSelectionState();
+                    break;
+                case InteractionState.Activated:
+                    HandleActiveState();
+                    break;
+            }
         }
 
         private void HandleNoneState()
@@ -73,7 +86,7 @@ namespace Kandooz.InteractionSystem.Interactions
 
         private void HandleHoverState()
         {
-            if (currentState == InteractionState.Selected)
+            if (currentState is InteractionState.Selected or InteractionState.Activated)
             {
                 selected = false;
                 onDeselected.Invoke(currentInteractor);
@@ -87,36 +100,54 @@ namespace Kandooz.InteractionSystem.Interactions
 
         private void HandleSelectionState()
         {
+            if (currentState == InteractionState.Activated)
+            {
+                onDeactivated.Invoke(currentInteractor);
+            }
+
             if (currentState == InteractionState.Hovering)
             {
                 onHoverEnd.Invoke(currentInteractor);
                 EndHover();
-            }
+                onSelected.Invoke(currentInteractor);
+                Select();
 
+            }
+            
             selected = true;
-            onSelected.Invoke(currentInteractor);
-            Select();
             currentState = InteractionState.Selected;
         }
 
         private void HandleActiveState()
         {
-            if (this.currentState == InteractionState.Selected)
+            if (currentState == InteractionState.Selected)
             {
-                onActivated.Invoke(currentInteractor);
+                _activated = true;
+                onActivated?.Invoke(currentInteractor);
+                currentState = InteractionState.Activated;
                 Activate();
             }
         }
 
-        protected virtual void Activate() { }
+        protected virtual void Activate()
+        {
+        }
 
-        protected virtual void StartHover() { }
+        protected virtual void StartHover()
+        {
+        }
 
-        protected virtual void EndHover() { }
+        protected virtual void EndHover()
+        {
+        }
 
-        protected virtual void Select() { }
+        protected virtual void Select()
+        {
+        }
 
-        protected virtual void DeSelected() { }
+        protected virtual void DeSelected()
+        {
+        }
 
         public bool IsValidHand(HandIdentifier hand)
         {

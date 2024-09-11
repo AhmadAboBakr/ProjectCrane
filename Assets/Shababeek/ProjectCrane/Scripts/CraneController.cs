@@ -3,9 +3,8 @@ using Kandooz.InteractionSystem.Core;
 using Kandooz.InteractionSystem.Interactions;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Kandooz
+namespace Shababeek.Cranes
 {
     [RequireComponent(typeof(Rigidbody))]
     public class CraneController : MonoBehaviour

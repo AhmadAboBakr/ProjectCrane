@@ -1,0 +1,233 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8849224988796699749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c047d1897c421eab86c4cd773bae11, type: 3}
+  m_Name: CraneTraining-6_GrabContainer
+  m_EditorClassIdentifier: 
+  onRaised:
+    m_PersistentCalls:
+      m_Calls: []
+  status: 0
+  audioObject: {fileID: 0}
+  audioClip: {fileID: 0}
+  canBeFinshedBeforeStarted: 0
+  audioOnly: 0
+  audioDelay: 0.5
+  onStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  overridePitch: 0
+  pitch: 0
+--- !u!114 &-7401149129779144408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c047d1897c421eab86c4cd773bae11, type: 3}
+  m_Name: CraneTraining-7_MoveContainer TO HIGHLIGHTED POSITION
+  m_EditorClassIdentifier: 
+  onRaised:
+    m_PersistentCalls:
+      m_Calls: []
+  status: 0
+  audioObject: {fileID: 0}
+  audioClip: {fileID: 0}
+  canBeFinshedBeforeStarted: 0
+  audioOnly: 0
+  audioDelay: 0.5
+  onStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  overridePitch: 0
+  pitch: 0
+--- !u!114 &-7260402157481671662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c047d1897c421eab86c4cd773bae11, type: 3}
+  m_Name: CraneTraining-5_CloseHook
+  m_EditorClassIdentifier: 
+  onRaised:
+    m_PersistentCalls:
+      m_Calls: []
+  status: 0
+  audioObject: {fileID: 0}
+  audioClip: {fileID: 0}
+  canBeFinshedBeforeStarted: 0
+  audioOnly: 0
+  audioDelay: 0.5
+  onStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  overridePitch: 0
+  pitch: 0
+--- !u!114 &-5760594879161252533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c047d1897c421eab86c4cd773bae11, type: 3}
+  m_Name: CraneTraining-3_MoveBackwards
+  m_EditorClassIdentifier: 
+  onRaised:
+    m_PersistentCalls:
+      m_Calls: []
+  status: 0
+  audioObject: {fileID: 0}
+  audioClip: {fileID: 0}
+  canBeFinshedBeforeStarted: 0
+  audioOnly: 0
+  audioDelay: 0.5
+  onStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  overridePitch: 0
+  pitch: 0
+--- !u!114 &-2645169619291658521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c047d1897c421eab86c4cd773bae11, type: 3}
+  m_Name: CraneTraining-1_WelcomeMessage
+  m_EditorClassIdentifier: 
+  onRaised:
+    m_PersistentCalls:
+      m_Calls: []
+  status: 0
+  audioObject: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 397be09e90b934507b2eb8851a35903e, type: 3}
+  canBeFinshedBeforeStarted: 0
+  audioOnly: 1
+  audioDelay: 0.5
+  onStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  overridePitch: 0
+  pitch: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e83ea0ef9dec447f4abf2e40ce9795a1, type: 3}
+  m_Name: CraneTraining
+  m_EditorClassIdentifier: 
+  onRaised:
+    m_PersistentCalls:
+      m_Calls: []
+  status: 0
+  audioObject: {fileID: 0}
+  pitch: 1
+  volume: 0.5
+  steps:
+  - {fileID: -2645169619291658521}
+  - {fileID: 3446392379026377318}
+  - {fileID: -5760594879161252533}
+  - {fileID: 780799110189612939}
+  - {fileID: -7260402157481671662}
+  - {fileID: -8849224988796699749}
+  - {fileID: -7401149129779144408}
+  currentStepIndex: 0
+--- !u!114 &780799110189612939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c047d1897c421eab86c4cd773bae11, type: 3}
+  m_Name: CraneTraining-4_MoveHookDown
+  m_EditorClassIdentifier: 
+  onRaised:
+    m_PersistentCalls:
+      m_Calls: []
+  status: 0
+  audioObject: {fileID: 0}
+  audioClip: {fileID: 0}
+  canBeFinshedBeforeStarted: 0
+  audioOnly: 0
+  audioDelay: 0.5
+  onStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  overridePitch: 0
+  pitch: 0
+--- !u!114 &3446392379026377318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c047d1897c421eab86c4cd773bae11, type: 3}
+  m_Name: CraneTraining-2_MoveForward
+  m_EditorClassIdentifier: 
+  onRaised:
+    m_PersistentCalls:
+      m_Calls: []
+  status: 0
+  audioObject: {fileID: 0}
+  audioClip: {fileID: 0}
+  canBeFinshedBeforeStarted: 0
+  audioOnly: 0
+  audioDelay: 0.5
+  onStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  overridePitch: 0
+  pitch: 0

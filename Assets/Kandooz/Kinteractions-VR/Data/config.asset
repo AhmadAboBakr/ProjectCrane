@@ -25,7 +25,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 0
-  inputType: -1
+  inputType: 0
   handMass: 30
   linearDamping: 5
   angularDamping: 1
